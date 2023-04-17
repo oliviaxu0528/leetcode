@@ -20,3 +20,25 @@
 # Output: true
 # Explanation: s is an empty string "" after removing non-alphanumeric characters.
 # Since an empty string reads the same forward and backward, it is a palindrome.
+def isPalindrome(s):
+    """
+    :type s: str
+    :rtype: bool
+    """
+    alpha = "abcdefghijklmnopqrstuvwxyz0123456789"
+    new = ""
+    for char in s:
+        if char.lower() in alpha:
+            new += char.lower()
+
+    i, j = 0, len(new)-1
+
+    while i < len(new)//2:
+        if new[i] != new[j]:
+            return False
+        i += 1
+        j -= 1
+    return True
+
+
+print(isPalindrome("A man, a plan, a canal: Panama"))
