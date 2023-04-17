@@ -31,19 +31,25 @@ def threeSum(nums):
     """
     # sort the nums
     nums.sort()
-    print(nums)
+    # print(nums)
     # take the first one, loop through the rest as a two sum
     res = []
     for i in range(len(nums)-2):
+        if i > 0 and nums[i] == nums[i-1]:  # [[-1, 2, -1], [0, 1, -1], [0, 1, -1]]
+            continue
         left = i+1
         right = len(nums)-1
         while left < right:
-            if nums[left]+nums[right] == -nums[i]:
-                res.append([nums[left], nums[right], nums[i]])
-            elif nums[left]+nums[right] + nums[i] < 0:
+            threesum = nums[left]+nums[right] + nums[i]
+            if threesum > 0:
+                right -= 1
+            elif threesum < 0:
                 left += 1
             else:
-                right -= 1
+                res.append([nums[left], nums[right], nums[i]])
+                left += 1
+                while left < right and nums[left] == nums[left-1]:
+                    left += 1
 
     # print("res: ": res)
     return res
