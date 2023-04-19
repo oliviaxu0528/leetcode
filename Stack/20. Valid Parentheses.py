@@ -18,3 +18,21 @@
 
 # Input: s = "(]"
 # Output: false
+
+def isValid(s):
+  #create stack
+  dic = {')':'(',"}":"{","]":"["}
+  stack = []
+  for c in s:
+    if c in dic:
+        if stack and stack[-1] == dic[c]:
+            print("stack: ",stack)
+            stack.pop()
+        else:
+            return False
+    else:
+        stack.append(c)
+  return not stack
+
+s = "()"
+print(isValid(s))
