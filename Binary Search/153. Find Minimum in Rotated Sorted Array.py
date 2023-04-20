@@ -28,24 +28,16 @@
 # Input: nums = [11,13,15,17]
 # Output: 11
 # Explanation: The original array was [11,13,15,17] and it was rotated 4 times.
-def search(nums,target):
+def findMin(self, nums: List[int]) -> int:
+  res = nums[0]
   l, r = 0, len(nums)-1
-
-  while l <= r:
-      mid = (l + r) // 2
-      if target == nums[mid]:
-          return mid
-
-      # left sorted portion
-      if nums[l] <= nums[mid]:
-          if target > nums[mid] or target < nums[l]:
-              l = mid + 1
-          else:
-              r = mid - 1
-      # right sorted portion
+  while l<=r:
+      if nums[l] < nums[r]:
+          res = min(res, nums[l])
+      m = (l+r)//2
+      res = min(res,nums[m])
+      if nums[m]>=nums[l]:
+          l = m+1
       else:
-          if target < nums[mid] or target > nums[r]:
-              r = mid - 1
-          else:
-              l = mid + 1
-  return -1
+          r = m
+  return res
